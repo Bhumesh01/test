@@ -1,65 +1,98 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
 
 export default function Home() {
+  const [name, setName] = useState('');
+  const [wish, setWish] = useState('');
+  const [showWish, setShowWish] = useState(false);
+
+  const generateWish = () => {
+    if (!name.trim()) return;
+
+    const wishes = [
+      `Happy Birthday, ${name}! 🎉 May your day be filled with joy, laughter, and all your favorite things!`,
+      `Wishing you a fantastic birthday, ${name}! 🎂 Hope this year brings you endless happiness and success!`,
+      `Cheers to another year of amazing adventures, ${name}! 🥳 Have a birthday that's as wonderful as you are!`,
+      `Happy Birthday, ${name}! 🎈 May all your dreams come true and your wishes be granted!`,
+      `To ${name}, on your special day: May your birthday be the start of a year full of good luck, good health, and much happiness! 🎊`
+    ];
+
+    const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+    setWish(randomWish);
+    setShowWish(true);
+  };
+
+  const reset = () => {
+    setName('');
+    setWish('');
+    setShowWish(false);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-linear-to-br from-pink-100 via-purple-100 to-indigo-100 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-8 transform transition-all duration-300 hover:scale-105">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold bg-linear-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
+            🎉 Birthday Wisher 🎉
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <p className="text-gray-600 text-lg">Create magical birthday wishes!</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {!showWish ? (
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                Enter the birthday person's name:
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-center text-lg"
+                placeholder="e.g., John Doe"
+                onKeyPress={(e) => e.key === 'Enter' && generateWish()}
+              />
+            </div>
+
+            <button
+              onClick={generateWish}
+              disabled={!name.trim()}
+              className="w-full bg-linear-to-r from-pink-500 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            >
+              ✨ Generate Wish ✨
+            </button>
+          </div>
+        ) : (
+          <div className="text-center space-y-6">
+            <div className="bg-linear-to-r from-yellow-100 to-orange-100 p-6 rounded-2xl border-2 border-yellow-200">
+              <p className="text-lg font-medium text-gray-800 leading-relaxed">
+                {wish}
+              </p>
+            </div>
+
+            <div className="flex space-x-4">
+              <button
+                onClick={reset}
+                className="flex-1 bg-gray-200 text-gray-700 py-3 px-6 rounded-xl font-semibold shadow-md hover:shadow-lg transform transition-all duration-200 hover:scale-105"
+              >
+                Create Another
+              </button>
+              <button
+                onClick={() => navigator.share ? navigator.share({ text: wish }) : navigator.clipboard.writeText(wish)}
+                className="flex-1 bg-linear-to-r from-green-500 to-blue-500 text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:shadow-lg transform transition-all duration-200 hover:scale-105"
+              >
+                Share Wish
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-8 text-center">
+          <p className="text-sm text-gray-500">Made with ❤️ using Next.js</p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
