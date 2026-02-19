@@ -37,7 +37,7 @@ export default function Home() {
             🎉 Birthday Wisher 🎉
           </h1>
           <h2 className='text-2xl font-bold bg-linear-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2'>Wish Your Closed One Now!</h2>
-          <p className="text-gray-600 text-lg">Create magical birthday wishes!</p>
+          <p className="text-gray-600 text-lg font-semibold">Create magical birthday wishes!</p>
         </div>
 
         {!showWish ? (
