@@ -22,6 +22,4 @@ jobs:
                     git pull origin main
                     npm install
                     npm run build
-                    pm2 delete test || true
-                    pm2 start npm --name "test" -- start
-                    pm2 save
+                    pm2 restart test || pm2 start npm --name "test" -- start
