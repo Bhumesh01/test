@@ -43,7 +43,7 @@ export default function Home() {
           <div className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Enter the birthday person's name🎂:
+                Enter The Birthday Person's Name:
               </label>
               <input
                 id="name"
