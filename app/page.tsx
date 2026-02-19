@@ -36,6 +36,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold bg-linear-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
             🎉 Birthday Wisher 🎉
           </h1>
+          <h2 className='text-2xl font-bold bg-linear-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2'>Wish Your Closed One Now!</h2>
           <p className="text-gray-600 text-lg">Create magical birthday wishes!</p>
         </div>
 
@@ -43,7 +44,7 @@ export default function Home() {
           <div className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Enter The Birthday Person's Name:
+                Enter The Birthday Person's Name🎂:
               </label>
               <input
                 id="name"
